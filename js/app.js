@@ -13,7 +13,7 @@ const displayPost = (posts) => {
         div.classList.add('w-full', 'flex', 'gap-10', 'justify-between', 'rounded-3xl', 'items-center', 'p-5', 'bg-[#F3F3F5]', 'pl-3', 'm-3');
         div.innerHTML = `
     <div class="h-[72px] w-[100px] rounded-xl ml-4 mb-24 bg-[#FFFFFF] relative">
-    <img src="${post.image}" alt="">
+    <img src="${post.image}" alt="" class="rounded-xl">
     <div class="round-circle w-[18px] h-[18px] bg-[#10B981] rounded-full absolute left-[86px] bottom-[62px]">
     </div>
 </div>
@@ -109,13 +109,16 @@ const displayLatestNews = async (data) => {
         <img src="${news.cover_image}" alt="Shoes" class="rounded-xl" />
       </figure>
       <div class="  card-body">
-      <p>${news.author.posted_date}</p>
+      <p>${news.author.posted_date ? news.author.posted_date : 'No publish date'}</p>
         <h2 class="card-title">${news.title}</h2>
-        <p>${news.description}</p>
-        <div class="card-actions">
-          <button class="btn btn-primary">Buy Now</button>
+        <p>${news.description }</p>
+        <div class="flex gap-5">
+        <img class="w-[44px] h-[44px] rounded-full" src="${news.profile_image}" alt="">
+        <div>
+            <h2 class="text-xl font-bold mulish">${news.author.name}</h2>
+            <h6>${news.author.designation? news.author.designation:'unknown'}</h6>
         </div>
-      </div>
+     </div>
         `
         latestNewsContainer.appendChild(card)
     })
