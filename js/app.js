@@ -4,17 +4,19 @@ const loadAllNews = async () => {
     const posts = data.posts;
     // console.log(posts)
     displayPost(posts)
+    displayAllNewsTitle(posts)
 }
 
 
 const displayPost = (posts) => {
     posts.forEach(post => {
+
         const div = document.createElement('div');
         div.classList.add('w-full', 'flex', 'gap-10', 'justify-between', 'rounded-3xl', 'items-center', 'p-5', 'bg-[#F3F3F5]', 'pl-3', 'm-3');
         div.innerHTML = `
     <div class="h-[72px] w-[100px] rounded-xl ml-4 mb-24 bg-[#FFFFFF] relative">
     <img src="${post.image}" alt="" class="rounded-xl">
-    <div class="round-circle w-[18px] h-[18px] bg-[#10B981] rounded-full absolute left-[86px] bottom-[62px]">
+    <div class="round-circle w-[18px] h-[18px] ${post.isActive ? 'bg-green-500' : 'bg-red-500'}  rounded-full absolute left-[86px] bottom-[62px]">
     </div>
 </div>
 <div class="space-y-3">
@@ -65,21 +67,16 @@ const displayPost = (posts) => {
 
         </div>
         <div class="flex p-5">
-            <a href=""><svg width="28.000000" height="28.000000" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <desc>
-                        Created with Pixso.
-                </desc>
-                <defs>
-                    <clipPath id="clip57_425">
-                        <rect id="email 1" width="28.000000" height="28.000000" fill="white" fill-opacity="0"/>
-                    </clipPath>
-                </defs>
-                <rect id="email 1" width="28.000000" height="28.000000" fill="#FFFFFF" fill-opacity="0"/>
-                <g clip-path="url(#clip57_425)">
-                    <path id="Vector" d="M13.9998 0C6.26807 0 0.00012207 6.26819 0.00012207 13.9999C0.00012207 21.7314 6.26807 28 13.9998 28C21.7315 28 27.9999 21.7314 27.9999 13.9999C27.9999 6.26819 21.7315 0 13.9998 0ZM14.0001 4.91736L22.2847 10.0835L5.71545 10.0835L14.0001 4.91736ZM22.3879 18.333L22.3871 18.333C22.3871 19.1616 21.7155 19.833 20.887 19.833L7.11313 19.833C6.28452 19.833 5.61307 19.1615 5.61307 18.333L5.61307 10.4122C5.61307 10.3246 5.62201 10.2394 5.63657 10.1556L13.5521 15.0914C13.5618 15.0974 13.5721 15.1016 13.5821 15.1072C13.5926 15.1129 13.6032 15.1185 13.6139 15.1239C13.6698 15.1527 13.7274 15.176 13.7863 15.1912C13.7923 15.1929 13.7984 15.1936 13.8044 15.1949C13.869 15.2102 13.9344 15.2197 13.9998 15.2197L14.0003 15.2197C14.0007 15.2197 14.0012 15.2197 14.0012 15.2197C14.0665 15.2197 14.132 15.2104 14.1965 15.1949C14.2026 15.1935 14.2087 15.1929 14.2148 15.1912C14.2735 15.176 14.3309 15.1527 14.3871 15.1239C14.3978 15.1185 14.4084 15.1129 14.4189 15.1072C14.4288 15.1016 14.4392 15.0974 14.4489 15.0914L22.3644 10.1556C22.379 10.2394 22.3879 10.3243 22.3879 10.4122L22.3879 18.333Z" fill="#10B981" fill-opacity="1.000000" fill-rule="nonzero"/>
-                </g>
-            </svg>
-            </a>
+            <div onclick="displayAllNewsTitle()">
+            <svg width="27.999817" height="28.000000" viewBox="0 0 27.9998 28" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs/>
+	<path id="Vector" d="M13.9997 0C6.26794 0 0 6.26813 0 13.9998C0 21.7314 6.26794 28 13.9997 28C21.7314 28 27.9998 21.7314 27.9998 13.9998C27.9998 6.26813 21.7314 0 13.9997 0ZM13.9999 4.91742L22.2846 10.0835L5.71533 10.0835L13.9999 4.91742ZM22.3878 18.333L22.387 18.333C22.387 19.1616 21.7154 19.8331 20.8869 19.8331L7.11301 19.8331C6.28439 19.8331 5.61295 19.1615 5.61295 18.333L5.61295 10.4122C5.61295 10.3246 5.62189 10.2393 5.63644 10.1556L13.5519 15.0914C13.5616 15.0975 13.572 15.1016 13.582 15.1072C13.5925 15.113 13.6031 15.1186 13.6137 15.1239C13.6696 15.1527 13.7272 15.176 13.7861 15.1912C13.7922 15.1929 13.7982 15.1936 13.8043 15.195C13.8689 15.2102 13.9343 15.2197 13.9997 15.2197L14.0002 15.2197C14.0006 15.2197 14.0011 15.2197 14.0011 15.2197C14.0664 15.2197 14.1318 15.2105 14.1964 15.195C14.2025 15.1935 14.2086 15.1929 14.2146 15.1912C14.2734 15.176 14.3308 15.1527 14.387 15.1239C14.3976 15.1186 14.4083 15.113 14.4187 15.1072C14.4286 15.1016 14.4391 15.0975 14.4488 15.0914L22.3643 10.1556C22.3788 10.2393 22.3878 10.3243 22.3878 10.4122L22.3878 18.333Z" fill="#10B981" fill-opacity="1.000000" fill-rule="nonzero"/>
+</svg>
+
+            </div>
         </div>
     </div>
 </div>
@@ -90,6 +87,46 @@ const displayPost = (posts) => {
     });
 
 }
+// display title
+const displayAllNewsTitle = (posts) => {
+    markAsReadHandle()
+    // console.log(posts)
+    posts.forEach(post => {
+        // console.log(post)
+        const titleContainer = document.getElementById('title-container');
+        const titleCard = document.createElement('div');
+        // <div class="flex justify-between w-full bg-[#FFFFFF] p-6 rounded-xl"></div>
+        titleCard.classList.add('flex', 'justify-between', 'w-full', 'bg-[#FFFFFF]', 'p-6', 'rounded-xl')
+        titleCard.innerHTML = `
+        <div>
+                                <h2 class="w-[80%]">10 Kids Unaware of Their Halloween Costume</h2>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <a href=""><svg width="22.500000" height="15.500000" viewBox="0 0 22.5 15.5" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <desc>
+                                            Created with Pixso.
+                                    </desc>
+                                    <defs/>
+                                    <path id="Vector" d="M9.6001 9.3999C10.0377 9.83752 10.6312 10.0834 11.25 10.0834C11.8688 10.0834 12.4623 9.83752 12.8999 9.3999C13.3375 8.96228 13.5833 8.3689 13.5833 7.75C13.5833 7.1311 13.3375 6.5376 12.8999 6.1001C12.4623 5.6626 11.8688 5.41675 11.25 5.41675C10.6312 5.41675 10.0377 5.6626 9.6001 6.1001C9.16248 6.5376 8.91669 7.1311 8.91669 7.75C8.91669 8.3689 9.16248 8.96228 9.6001 9.3999ZM11.25 14.75C7.04999 14.75 3.54999 12.4166 0.75 7.75C3.54999 3.08325 7.04999 0.75 11.25 0.75C15.45 0.75 18.95 3.08325 21.75 7.75C18.95 12.4166 15.45 14.75 11.25 14.75Z" stroke="#12132D" stroke-opacity="0.600000" stroke-width="1.500000" stroke-linejoin="round"/>
+                                </svg>
+                                </a>
+                                <span>5000</span>
+                            </div>
+        `
+        titleContainer.appendChild(titleCard)
+    })
+
+};
+// mark ass read
+const markAsReadNumber = document.getElementById('mark-as-read');
+let markAsReadValue = 0;
+const markAsReadHandle = () => {
+    markAsReadValue += 1;
+    markAsReadNumber.innerText = (markAsReadValue)
+}
+
+
+
 // latest news load
 const loadLatestNews = async () => {
     const res = await fetch('https://openapi.programming-hero.com/api/retro-forum/latest-posts')
@@ -111,12 +148,12 @@ const displayLatestNews = async (data) => {
       <div class="  card-body">
       <p>${news.author.posted_date ? news.author.posted_date : 'No publish date'}</p>
         <h2 class="card-title">${news.title}</h2>
-        <p>${news.description }</p>
+        <p>${news.description}</p>
         <div class="flex gap-5">
         <img class="w-[44px] h-[44px] rounded-full" src="${news.profile_image}" alt="">
         <div>
             <h2 class="text-xl font-bold mulish">${news.author.name}</h2>
-            <h6>${news.author.designation? news.author.designation:'unknown'}</h6>
+            <h6>${news.author.designation ? news.author.designation : 'unknown'}</h6>
         </div>
      </div>
         `
