@@ -28,13 +28,13 @@
 <body>
     <header class="container mx-auto md:p-7">
         <!-- navbar start -->
-        <nav>
+        <nav class="">
             <div class="navbar bg-base-100">
                 <div class="flex-1">
                     <a class="text-3xl font-black btn btn-ghost mulish">ClassicEcho</a>
                 </div>
-                <div class="flex-none">
-                    <div class="flex mr-5 gap-x-5">
+                <div class="flex-none ">
+                    <div class="hidden mr-5 md:flex gap-x-5">
                         <a title="Home" class="border-[#12132D08] bg-[#0307121A] p-3 border-solid border rounded-full"
                             href=""><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -75,25 +75,29 @@
         <!-- navbar end -->
         <!-- banner section start -->
         <section class="mt-5">
-            <div class="  flex flex-col md:flex-row justify-between  bg-no-repeat  rounded-3xl bg-[#12132D] pl-4 "
-                style="background-image: url('./images/bgbanner.png'); width: 100%; height: 100%;  ">
-                <div class="py-10 m-3 md:space-y-12 ">
-                    <h2 class="font-black text-white mulish md:text-5xl">Welcome to the <br> ClassicEcho Forum</h2>
-                    <p class="text-white">Share your favorite opinion and win and wp forum coffee mug!</p>
-                    <input type="text" placeholder="Type here" class="input input-bordered md:w-[360px] rounded-3xl" />
-                    <button class=" -ml-32 btn px-10 text-white rounded-3xl bg-[#797DFC] border-none">Search</button>
-                </div>
-                <div class="flex items-center justify-center mr-10">
-                    <div class="flex justify-center p-4 shadow-xl card w-52 bg-base-100 h-1/2 ">
-                        <p class="flex justify-between">Registered Users <span class="">01</span></p>
-                        <p class="flex justify-between">Forum <span class="ml-">05</span></p>
-                        <p class="flex justify-between"> Topics<span class="ml-">01</span></p>
-                        <p class="flex justify-between">Replies<span class="">01</span></p>
+
+            <div class="h-[550px] rounded-3xl hero"
+                style="background-image: url(./images/bgbanner.png); background-color: #12132D;">
+                <div class="flex flex-col items-center justify-between gap-x-16 md:flex-row">
+                    <div>
+                        <h2 class="text-5xl font-black text-white mulish">Welcome to the <br><span class="text-[#797DFC]">ClassicEcho</span> Forum</h2>
+                        <p class="text-white">Share your favorite opinion and win and wp forum coffee mug!</p>
+                        <input type="text" placeholder="Type here"
+                            class="input input-bordered md:w-[360px] rounded-3xl" />
+                        <button
+                            class=" -ml-32 btn px-10 text-white rounded-3xl bg-[#797DFC] border-none">Search</button>
+                    </div>
+                    <div>
+                        <div class="flex justify-center p-4 shadow-xl card w-[341px] h-[241px] bg-base-100 px-10 ">
+                            <p class="flex justify-between">Registered Users <span class="">01</span></p>
+                            <p class="flex justify-between">Forum <span class="ml-">05</span></p>
+                            <p class="flex justify-between"> Topics<span class="ml-">01</span></p>
+                            <p class="flex justify-between">Replies<span class="">01</span></p>
+                        </div>
                     </div>
                 </div>
-
             </div>
-
+            
         </section>
         <!-- banner section end -->
     </header>
@@ -106,13 +110,16 @@
                     app. <br> The integrated testing features allow for a streamlined .</p>
             </div>
             <!-- js part -->
-            <div class="flex justify-between mt-20">
+            <div id="loading" class="flex justify-center hidden">
+                <img src="./images/200w.gif" alt="">
+            </div>
+            <div class="flex flex-col justify-between mt-20 md:flex-row">
                 <!-- left -->
-                <div id="discus-card-container" class="w-[60%] ">
+                <div id="discus-card-container" class="md:w-[60%] w-full ">
                     <!-- card -->
                 </div>
                 <!-- right title section-->
-                <div class="bg-[#12132D0D] w-[400px] min-h-screen rounded-xl p-5">
+                <div class="bg-[#12132D0D] md:w-[400px] w-full min-h-screen rounded-xl p-5">
                     <div class="flex justify-between p-7">
                         <h2 class="text-xl mulish font-bold text-[#12132D]">Title</h2>
                         <div class="flex">
@@ -148,18 +155,22 @@
                                 <h2 class="w-[80%]">10 Kids Unaware of Their Halloween Costume</h2>
                             </div>
                             <div class="flex items-center gap-3">
-                                <a href=""><svg width="22.500000" height="15.500000" viewBox="0 0 22.5 15.5" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                    <desc>
+                                <a href=""><svg width="22.500000" height="15.500000" viewBox="0 0 22.5 15.5" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <desc>
                                             Created with Pixso.
-                                    </desc>
-                                    <defs/>
-                                    <path id="Vector" d="M9.6001 9.3999C10.0377 9.83752 10.6312 10.0834 11.25 10.0834C11.8688 10.0834 12.4623 9.83752 12.8999 9.3999C13.3375 8.96228 13.5833 8.3689 13.5833 7.75C13.5833 7.1311 13.3375 6.5376 12.8999 6.1001C12.4623 5.6626 11.8688 5.41675 11.25 5.41675C10.6312 5.41675 10.0377 5.6626 9.6001 6.1001C9.16248 6.5376 8.91669 7.1311 8.91669 7.75C8.91669 8.3689 9.16248 8.96228 9.6001 9.3999ZM11.25 14.75C7.04999 14.75 3.54999 12.4166 0.75 7.75C3.54999 3.08325 7.04999 0.75 11.25 0.75C15.45 0.75 18.95 3.08325 21.75 7.75C18.95 12.4166 15.45 14.75 11.25 14.75Z" stroke="#12132D" stroke-opacity="0.600000" stroke-width="1.500000" stroke-linejoin="round"/>
-                                </svg>
+                                        </desc>
+                                        <defs />
+                                        <path id="Vector"
+                                            d="M9.6001 9.3999C10.0377 9.83752 10.6312 10.0834 11.25 10.0834C11.8688 10.0834 12.4623 9.83752 12.8999 9.3999C13.3375 8.96228 13.5833 8.3689 13.5833 7.75C13.5833 7.1311 13.3375 6.5376 12.8999 6.1001C12.4623 5.6626 11.8688 5.41675 11.25 5.41675C10.6312 5.41675 10.0377 5.6626 9.6001 6.1001C9.16248 6.5376 8.91669 7.1311 8.91669 7.75C8.91669 8.3689 9.16248 8.96228 9.6001 9.3999ZM11.25 14.75C7.04999 14.75 3.54999 12.4166 0.75 7.75C3.54999 3.08325 7.04999 0.75 11.25 0.75C15.45 0.75 18.95 3.08325 21.75 7.75C18.95 12.4166 15.45 14.75 11.25 14.75Z"
+                                            stroke="#12132D" stroke-opacity="0.600000" stroke-width="1.500000"
+                                            stroke-linejoin="round" />
+                                    </svg>
                                 </a>
                                 <span>5000</span>
                             </div>
-                                
-                            </div>
+
+                        </div>
                     </div>
 
                 </div>

@@ -4,7 +4,8 @@ const loadAllNews = async () => {
     const posts = data.posts;
     // console.log(posts)
     displayPost(posts)
-    displayAllNewsTitle(posts)
+    // displayAllNewsTitle(posts)
+    
 }
 
 
@@ -12,7 +13,7 @@ const displayPost = (posts) => {
     posts.forEach(post => {
 
         const div = document.createElement('div');
-        div.classList.add('w-full', 'flex', 'gap-10', 'justify-between', 'rounded-3xl', 'items-center', 'p-5', 'bg-[#F3F3F5]', 'pl-3', 'm-3');
+        div.classList.add('w-full', 'flex','md:flex-row' ,'flex-col' , 'gap-10', 'justify-between', 'rounded-3xl', 'items-center', 'md:p-5', 'bg-[#F3F3F5]', 'pl-3', 'm-3');
         div.innerHTML = `
     <div class="h-[72px] w-[100px] rounded-xl ml-4 mb-24 bg-[#FFFFFF] relative">
     <img src="${post.image}" alt="" class="rounded-xl">
@@ -67,7 +68,7 @@ const displayPost = (posts) => {
 
         </div>
         <div class="flex p-5">
-            <div onclick="displayAllNewsTitle()">
+            <div onclick="handleClickOne()">
             <svg width="27.999817" height="28.000000" viewBox="0 0 27.9998 28" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 	<desc>
 			Created with Pixso.
@@ -85,41 +86,32 @@ const displayPost = (posts) => {
         postContainer.appendChild(div)
 
     });
+    handleLoading(false);
+    // document.getElementById('loading').classList.add('hidden')
 
 }
-// display title
-const displayAllNewsTitle = (posts) => {
+// handle 
+const handleClickOne=()=>{
     markAsReadHandle()
-    // console.log(posts)
-    posts.forEach(post => {
-        // console.log(post)
-        const titleContainer = document.getElementById('title-container');
-        const titleCard = document.createElement('div');
-        // <div class="flex justify-between w-full bg-[#FFFFFF] p-6 rounded-xl"></div>
-        titleCard.classList.add('flex', 'justify-between', 'w-full', 'bg-[#FFFFFF]', 'p-6', 'rounded-xl')
-        titleCard.innerHTML = `
-        <div>
-                                <h2 class="w-[80%]">10 Kids Unaware of Their Halloween Costume</h2>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <a href=""><svg width="22.500000" height="15.500000" viewBox="0 0 22.5 15.5" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                    <desc>
-                                            Created with Pixso.
-                                    </desc>
-                                    <defs/>
-                                    <path id="Vector" d="M9.6001 9.3999C10.0377 9.83752 10.6312 10.0834 11.25 10.0834C11.8688 10.0834 12.4623 9.83752 12.8999 9.3999C13.3375 8.96228 13.5833 8.3689 13.5833 7.75C13.5833 7.1311 13.3375 6.5376 12.8999 6.1001C12.4623 5.6626 11.8688 5.41675 11.25 5.41675C10.6312 5.41675 10.0377 5.6626 9.6001 6.1001C9.16248 6.5376 8.91669 7.1311 8.91669 7.75C8.91669 8.3689 9.16248 8.96228 9.6001 9.3999ZM11.25 14.75C7.04999 14.75 3.54999 12.4166 0.75 7.75C3.54999 3.08325 7.04999 0.75 11.25 0.75C15.45 0.75 18.95 3.08325 21.75 7.75C18.95 12.4166 15.45 14.75 11.25 14.75Z" stroke="#12132D" stroke-opacity="0.600000" stroke-width="1.500000" stroke-linejoin="round"/>
-                                </svg>
-                                </a>
-                                <span>5000</span>
-                            </div>
-        `
-        titleContainer.appendChild(titleCard)
-    })
+    handleLoading(true)
+    displayAllNewsTitle()
 
+
+}
+
+
+// display title
+const displayAllNewsTitle = (event) => {
+    console.log('clicked')
+    console.log(event.target.id);
+    
+    
+    
+       
 };
 // mark ass read
 const markAsReadNumber = document.getElementById('mark-as-read');
-let markAsReadValue = 0;
+let markAsReadValue = 0-1;
 const markAsReadHandle = () => {
     markAsReadValue += 1;
     markAsReadNumber.innerText = (markAsReadValue)
@@ -140,7 +132,7 @@ const displayLatestNews = async (data) => {
     data.forEach(news => {
         const latestNewsContainer = document.getElementById('latest-post-container');
         const card = document.createElement('div');
-        card.classList.add('shadow-xl', 'card', 'w-96', 'bg-base-100');
+        card.classList.add('shadow-xl', 'card', 'md:w-96','w-full', 'bg-base-100');
         card.innerHTML = `
         <figure class="px-10 pt-10">
         <img src="${news.cover_image}" alt="Shoes" class="rounded-xl" />
@@ -162,6 +154,15 @@ const displayLatestNews = async (data) => {
 
 }
 
+
+const handleLoading=(isloading)=>{
+   const loading= document.getElementById('loading');
+   if(isloading===true){
+    loading.classList.remove('hidden');
+   }
+   else{loading.classList.add('hidden')}
+
+}
 
 loadLatestNews()
 loadAllNews()
