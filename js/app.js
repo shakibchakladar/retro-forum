@@ -5,7 +5,7 @@ const loadAllNews = async () => {
     // console.log(posts)
     displayPost(posts)
     // displayAllNewsTitle(posts)
-    
+
 }
 
 
@@ -13,7 +13,10 @@ const displayPost = (posts) => {
     posts.forEach(post => {
 
         const div = document.createElement('div');
-        div.classList.add('w-full', 'flex','md:flex-row' ,'flex-col' , 'gap-10', 'justify-between', 'rounded-3xl', 'items-center', 'md:p-5', 'bg-[#F3F3F5]', 'pl-3', 'm-3');
+        div.classList.add('w-full', 'flex', 'md:flex-row', 'flex-col', 'gap-10', 'rounded-3xl', 'items-center', 'md:p-5', 'bg-[#F3F3F5]', 'pl-3', 'm-3');
+        div.setAttribute('data-title', post.title)
+        div.setAttribute('id', `${post.id}`)
+        div.setAttribute('data-view-count', post.view_count)
         div.innerHTML = `
     <div class="h-[72px] w-[100px] rounded-xl ml-4 mb-24 bg-[#FFFFFF] relative">
     <img src="${post.image}" alt="" class="rounded-xl">
@@ -25,7 +28,7 @@ const displayPost = (posts) => {
         <h6>#${post.category}</h6>
         <h6>Author : ${post.author.name}</h6>
     </div>
-    <h2 class="text-xl font-bold mulish">${post.title}</h2>
+    <h2 class="text-xl font-bold mulish cart-title">${post.title}</h2>
     <p>${post.description}</p>
     <hr>
     
@@ -67,8 +70,8 @@ const displayPost = (posts) => {
             </a>
 
         </div>
-        <div class="flex p-5">
-            <div onclick="handleClickOne()">
+        <div class="flex p-5 discus-btn">
+            <div class="box" onclick="handleClickOne(${post.id})" data-title="${post.title}" data-view-count="${post.view_count}">
             <svg width="27.999817" height="28.000000" viewBox="0 0 27.9998 28" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 	<desc>
 			Created with Pixso.
@@ -86,32 +89,55 @@ const displayPost = (posts) => {
         postContainer.appendChild(div)
 
     });
-    handleLoading(false);
-    // document.getElementById('loading').classList.add('hidden')
+    handleLoading(false)
 
 }
 // handle 
-const handleClickOne=()=>{
+const handleClickOne = (id) => {
     markAsReadHandle()
-    handleLoading(true)
-    displayAllNewsTitle()
+    data = document.getElementById(`${id}`)
+    // console.log(`data: ${data.getAttribute('data-title')}, view-count: ${data.getAttribute('data-view-count')}`)
+    const titleData = data ? data.getAttribute('data-title') : null;
+    const titlViewCount = data ? data.getAttribute('data-view-count') : null;
+    // console.log(titleData);
+    appendData(titleData, titlViewCount)
 
+}
+
+const appendData = (titleData, titlViewCount) => {
+    // console.log(titlViewCount)
+    const container = document.getElementById('title-container');
+
+    const card = document.createElement('div');
+    // <div class="flex justify-between w-full bg-[#FFFFFF] p-6 rounded-xl">
+    card.classList.add('flex', 'justify-between','w-full','bg-[#FFFFFF]','p-6','rounded-xl', 'm-2')
+    card.innerHTML = `
+    <div>
+                                <h2 class="w-[80%]">${titleData}</h2>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <a href=""><svg width="22.500000" height="15.500000" viewBox="0 0 22.5 15.5" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <desc>
+                                            Created with Pixso.
+                                        </desc>
+                                        <defs />
+                                        <path id="Vector"
+                                            d="M9.6001 9.3999C10.0377 9.83752 10.6312 10.0834 11.25 10.0834C11.8688 10.0834 12.4623 9.83752 12.8999 9.3999C13.3375 8.96228 13.5833 8.3689 13.5833 7.75C13.5833 7.1311 13.3375 6.5376 12.8999 6.1001C12.4623 5.6626 11.8688 5.41675 11.25 5.41675C10.6312 5.41675 10.0377 5.6626 9.6001 6.1001C9.16248 6.5376 8.91669 7.1311 8.91669 7.75C8.91669 8.3689 9.16248 8.96228 9.6001 9.3999ZM11.25 14.75C7.04999 14.75 3.54999 12.4166 0.75 7.75C3.54999 3.08325 7.04999 0.75 11.25 0.75C15.45 0.75 18.95 3.08325 21.75 7.75C18.95 12.4166 15.45 14.75 11.25 14.75Z"
+                                            stroke="#12132D" stroke-opacity="0.600000" stroke-width="1.500000"
+                                            stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                                <span>${titlViewCount}</span>
+                            </div>
+    `
+    container.appendChild(card);
 
 }
 
 
-// display title
-const displayAllNewsTitle = (event) => {
-    console.log('clicked')
-    console.log(event.target.id);
-    
-    
-    
-       
-};
-// mark ass read
 const markAsReadNumber = document.getElementById('mark-as-read');
-let markAsReadValue = 0-1;
+let markAsReadValue = 0 ;
 const markAsReadHandle = () => {
     markAsReadValue += 1;
     markAsReadNumber.innerText = (markAsReadValue)
@@ -132,13 +158,18 @@ const displayLatestNews = async (data) => {
     data.forEach(news => {
         const latestNewsContainer = document.getElementById('latest-post-container');
         const card = document.createElement('div');
-        card.classList.add('shadow-xl', 'card', 'md:w-96','w-full', 'bg-base-100');
+        card.classList.add('shadow-xl', 'card', 'md:w-96', 'w-full', 'bg-base-100');
         card.innerHTML = `
         <figure class="px-10 pt-10">
         <img src="${news.cover_image}" alt="Shoes" class="rounded-xl" />
       </figure>
       <div class="  card-body">
+      <div class="flex gap-5">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
+</svg>
       <p>${news.author.posted_date ? news.author.posted_date : 'No publish date'}</p>
+      </div>
         <h2 class="card-title">${news.title}</h2>
         <p>${news.description}</p>
         <div class="flex gap-5">
@@ -155,14 +186,42 @@ const displayLatestNews = async (data) => {
 }
 
 
-const handleLoading=(isloading)=>{
-   const loading= document.getElementById('loading');
-   if(isloading===true){
-    loading.classList.remove('hidden');
-   }
-   else{loading.classList.add('hidden')}
+const handleLoading = (isloading) => {
+    const loading = document.getElementById('loading');
+    if (isloading) {
+        loading.classList.remove('hidden');
+    }
+    else { loading.classList.add('hidden') }
 
 }
+
+const loadAllNewsBysearch = async (value) => {
+    const res = await fetch(` https://openapi.programming-hero.com/api/retro-forum/posts?category=${value}`)
+    const data = await res.json()
+    const posts = data.posts;
+    displayPost(posts)
+}
+
+
+
+const handleSearch = () => {
+    const value = document.getElementById('search-box').value;
+    // console.log(value)
+    if (value) {
+        loadAllNewsBysearch(value);
+    }
+    else {
+        alert('please enter valid category name')
+    }
+
+}
+
+let cbox = document.querySelectorAll(".box");
+cbox.forEach(box => {
+    box.addEventListener('click', () => {
+        console.log('title: , view count: ')
+    });
+});
 
 loadLatestNews()
 loadAllNews()

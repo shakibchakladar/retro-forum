@@ -79,12 +79,12 @@
             <div class="h-[550px] rounded-3xl hero"
                 style="background-image: url(./images/bgbanner.png); background-color: #12132D;">
                 <div class="flex flex-col items-center justify-between gap-x-16 md:flex-row">
-                    <div>
+                    <div class="space-y-7">
                         <h2 class="text-5xl font-black text-white mulish">Welcome to the <br><span class="text-[#797DFC]">ClassicEcho</span> Forum</h2>
                         <p class="text-white">Share your favorite opinion and win and wp forum coffee mug!</p>
-                        <input type="text" placeholder="Type here"
+                        <input id="search-box" type="text" placeholder="Type here"
                             class="input input-bordered md:w-[360px] rounded-3xl" />
-                        <button
+                        <button onclick="handleSearch()"
                             class=" -ml-32 btn px-10 text-white rounded-3xl bg-[#797DFC] border-none">Search</button>
                     </div>
                     <div>
@@ -150,27 +150,7 @@
                     </div>
                     <!-- title container -->
                     <div id="title-container">
-                        <div class="flex justify-between w-full bg-[#FFFFFF] p-6 rounded-xl">
-                            <div>
-                                <h2 class="w-[80%]">10 Kids Unaware of Their Halloween Costume</h2>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <a href=""><svg width="22.500000" height="15.500000" viewBox="0 0 22.5 15.5" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                        <desc>
-                                            Created with Pixso.
-                                        </desc>
-                                        <defs />
-                                        <path id="Vector"
-                                            d="M9.6001 9.3999C10.0377 9.83752 10.6312 10.0834 11.25 10.0834C11.8688 10.0834 12.4623 9.83752 12.8999 9.3999C13.3375 8.96228 13.5833 8.3689 13.5833 7.75C13.5833 7.1311 13.3375 6.5376 12.8999 6.1001C12.4623 5.6626 11.8688 5.41675 11.25 5.41675C10.6312 5.41675 10.0377 5.6626 9.6001 6.1001C9.16248 6.5376 8.91669 7.1311 8.91669 7.75C8.91669 8.3689 9.16248 8.96228 9.6001 9.3999ZM11.25 14.75C7.04999 14.75 3.54999 12.4166 0.75 7.75C3.54999 3.08325 7.04999 0.75 11.25 0.75C15.45 0.75 18.95 3.08325 21.75 7.75C18.95 12.4166 15.45 14.75 11.25 14.75Z"
-                                            stroke="#12132D" stroke-opacity="0.600000" stroke-width="1.500000"
-                                            stroke-linejoin="round" />
-                                    </svg>
-                                </a>
-                                <span>5000</span>
-                            </div>
-
-                        </div>
+                        
                     </div>
 
                 </div>
@@ -220,7 +200,7 @@
                 that fuels
                 our passion. </p>
             <nav>
-                <div class="grid grid-flow-col gap-4">
+                <div class="grid grid-flow-col gap-4 ">
                     <a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             class="fill-current">
                             <path
@@ -252,10 +232,14 @@
                                 d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z">
                             </path>
                         </svg></a>
+                    
                 </div>
+                <hr>
             </nav>
+            
 
-            <aside class="border-dotted border-t-slate-600">
+            <aside class="">
+                <hr>
 
                 <p>Copyright © 2024 - All right reserved by ACME Industries Ltd</p>
             </aside>
