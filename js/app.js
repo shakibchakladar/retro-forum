@@ -201,7 +201,7 @@ const loadingSpiner = (isloading) => {
 // handle search
 
 const handleSearch = () => {
-    const inputvalue = document.getElementById('search-box').value;
+    const inputvalue= document.getElementById('search-box').value;
     loadNewsByCategory(inputvalue)
     loadingSpiner(true);
 
@@ -209,7 +209,6 @@ const handleSearch = () => {
 }
 
 const loadNewsByCategory = async (inputvalue) => {
-    console.log(inputvalue);
     const response = await fetch(` https://openapi.programming-hero.com/api/retro-forum/posts?category=${inputvalue}`)
     const data = await response.json();
     const posts = data.posts;
