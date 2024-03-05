@@ -146,8 +146,7 @@ const markAsReadHandle = () => {
 const loadLatestNews = async () => {
     const res = await fetch('https://openapi.programming-hero.com/api/retro-forum/latest-posts')
     const data = await res.json();
-    displayLatestNews(data)
-    // document.getElementById('loading').classList.remove('hidden');
+    displayLatestNews(data);
     loadingSpiner(true);
 }
 // latest news display
